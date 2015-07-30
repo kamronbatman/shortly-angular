@@ -11,6 +11,14 @@ module.exports = function (app, express) {
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
+  app.use(function(req, res, next){
+    res.header("access-control-allow-origin", "*");
+    res.header("access-control-allow-methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("access-control-allow-headers", "X-Requested-With");
+    res.header("access-control-max-age", 10); // Seconds.
+    next();
+  });
+
   app.use(express.static(__dirname + '/../../client'));
 
 

@@ -1,3 +1,17 @@
 <div id='container'>
-  <!-- Your html here -->
+
+  <button ng-click='signout()'>Log out</button>
+
+  <form name="shortenURLForm" ng-submit='shortenURL()'>
+    <input type="text" ng-model='urlToShorten'>
+    <button>Shorten</button>
+  </form>
+
+  <ul class="b-links">
+    <li class="b-links__link" ng-repeat="link in links">
+      <h2 class="b-links__title">{{ link.title }}</h2>
+      <p class="b-links__visits">{{ link.vists }}</p>
+      <p class="b-links__code">{{ link.code }}</p>
+    </li>
+  </ul>
 </div>
