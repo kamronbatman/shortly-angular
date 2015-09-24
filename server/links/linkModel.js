@@ -2,12 +2,12 @@ var mongoose = require('mongoose'),
     crypto   = require('crypto');
 
 var LinkSchema = new mongoose.Schema({
- visits: Number,
- link: String,
- title: String,
- code: String,
- base_url: String,
- url: String
+  visits: Number, // # of visits
+  link: String, // http://localhost:3000/235423458
+  title: String, // title of site
+  code: String, // some hash: 235423458
+  base_url: String, // localhost:3000
+  url: String // http://www.cnn.com
 });
 
 var createSha = function(url) {
@@ -19,6 +19,7 @@ var createSha = function(url) {
 LinkSchema.pre('save', function(next){
   var code = createSha(this.url);
   this.code = code;
+  this.link = this.base_url + '/' + this.code;
   next();
 });
 

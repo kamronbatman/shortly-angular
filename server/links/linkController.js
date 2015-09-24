@@ -39,6 +39,9 @@ module.exports = {
       return next(new Error('Not a valid url'));
     }
 
+    //req.not authorized somehow?
+    //return fuck you!
+
     var createLink = Q.nbind(Link.create, Link);
     var findLink = Q.nbind(Link.findOne, Link);
 
@@ -78,9 +81,16 @@ module.exports = {
       if (err) {
         next(err);
       } else {
-        res.redirect(savedLink.url);
+        res.send(savedLink.url);
+        //res.redirect(savedLink.url);
       }
     });
   }
-
 };
+
+/*Q.nbind(Link.create, Link)({
+            url: "http://www.cnn.com",
+            visits: 0,
+            base_url: "http://localhost:3000",
+            title: "CNN"
+          })*/
